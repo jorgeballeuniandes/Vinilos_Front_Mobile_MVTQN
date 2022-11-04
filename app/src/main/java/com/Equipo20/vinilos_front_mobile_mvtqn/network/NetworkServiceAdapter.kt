@@ -46,31 +46,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
 
     }
-    fun getArtist(onComplete:(resp:List<Artist>)->Unit, onError: (error:VolleyError)->Unit) {
-        requestQueue.add(
-            getRequest("artist",
-                Response.Listener<String> { response ->
-                    val resp = JSONArray(response)
-                    val list = mutableListOf<Artist>()
-                    for (i in 0 until resp.length()) {
-                        val item = resp.getJSONObject(i)
-                        list.add(
-                            i,
-                            Artist(
-                                artistId = item.getInt("id"),
-                                artistName = item.getString("name"),
-                                artistImage = item.getString("image"),
-                                artisDescription = item.getString("description")
-                            )
-                        )
-                    }
-                    onComplete(list)
-                },
-                Response.ErrorListener {
-                    onError(it)
-                }))
-        )
-    }
+
     fun getCollectors(onComplete:(resp:List<Collector>)->Unit, onError: (error:VolleyError)->Unit) {
         requestQueue.add(getRequest("collectors",
             Response.Listener<String> { response ->
@@ -99,4 +75,26 @@ class NetworkServiceAdapter constructor(context: Context) {
     private fun putRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
         return  JsonObjectRequest(Request.Method.PUT, BASE_URL+path, body, responseListener, errorListener)
     }
+
+    fun getArtist(onComplete:(resp:List<Artist>)->Unit, onError: (error:VolleyError)->Unit){
+        requestQueue.add(getRequest("artist",
+            Response.Listener<String> { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Artist>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+
+                    list.add(i, Artist(artistId = item.getInt("id"),artistName = item.getString("name"), artisDescription = item.getString("description"), artistImage = item.getString("image"),))
+                }
+                onComplete(list)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
+
+    }
+
+
+
+
 }
