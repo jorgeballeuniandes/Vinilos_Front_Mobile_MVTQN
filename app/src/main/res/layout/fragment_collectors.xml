@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable
-            name="prueba"
-            type="com.grupo20.vinilos.modelos.Collector" />
-    </data>
     <FrameLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -14,7 +9,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{prueba.name}" />
+            android:text="@string/title_collectors" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_collectors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/collector_item" />
     </FrameLayout>
 </layout>
