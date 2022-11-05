@@ -1,4 +1,4 @@
-package com.Equipo20.vinilos_front_mobile_mvtqn
+package com.grupo20.vinilos
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.Equipo20.vinilos_front_mobile_mvtqn", appContext.packageName)
+        assertEquals("com.grupo20.vinilos", appContext.packageName)
     }
 }

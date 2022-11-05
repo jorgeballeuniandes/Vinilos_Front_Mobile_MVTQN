@@ -1,4 +1,4 @@
-package com.Equipo20.vinilos_front_mobile_mvtqn
+package com.grupo20.vinilos
 
 import org.junit.Test
 

@@ -7,19 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.Equipo20.vinilos_front_mobile_mvtqn.ui.home.HomeFragment"
+        android:name="com.grupo20.vinilos.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_artists"
-        android:name="com.Equipo20.vinilos_front_mobile_mvtqn.ui.artists.ArtistsFragment"
-        android:label="@string/title_artists"
-        tools:layout="@layout/fragment_artists" />
-
-    <fragment
         android:id="@+id/navigation_collectors"
-        android:name="com.Equipo20.vinilos_front_mobile_mvtqn.ui.collectors.CollectorsFragment"
+        android:name="com.grupo20.vinilos.ui.collectors.CollectorsFragment"
         android:label="@string/title_collectors"
         tools:layout="@layout/fragment_collectors" />
 </navigation>
