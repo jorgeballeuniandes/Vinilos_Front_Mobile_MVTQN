@@ -1,35 +1,37 @@
 package com.example.vinilos_front_mobile_mvtqn.ui
 
 import android.os.Bundle
-import android.util.Log
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.vinilos_front_mobile_mvtqn.R
 import com.example.vinilos_front_mobile_mvtqn.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var navController: NavController
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Get the navigation host fragment from this Activity
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        // Instantiate the navController using the NavHostFragment
-        navController = navHostFragment.navController
-        // Make sure actions in the ActionBar get propagated to the NavController
-Log.d("act", navController.toString())
+        val navView: BottomNavigationView = binding.navView
+
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
-        setupActionBarWithNavController(navController)
-
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_artists, R.id.navigation_collectors
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
+
 }

@@ -6,11 +6,9 @@
     <item
         android:id="@+id/navigation_artists"
         android:icon="@drawable/ic_artists_black_24dp"
-        android:orderInCategory="102"
         android:title="Artists" />
     <item
         android:id="@+id/navigation_collectors"
         android:icon="@drawable/ic_collectors_black_24dp"
-        android:orderInCategory="103"
         android:title="Collectors" />
 </menu>

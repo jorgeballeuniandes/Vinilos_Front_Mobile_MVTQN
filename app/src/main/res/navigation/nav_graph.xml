@@ -5,6 +5,15 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/artistFragment">
     <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.example.vinilos_front_mobile_mvtqn.ui.ArtistFragment"
+        android:label="Artists"
+        tools:layout="@layout/artist_fragment" >
+        <action
+            android:id="@+id/action_artistFragment_to_artistFragment"
+            app:destination="@id/artistFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/collectorFragment"
         android:name="com.example.vinilos_front_mobile_mvtqn.ui.CollectorFragment"
         android:label="collector_fragment"
@@ -13,15 +22,7 @@
             android:id="@+id/action_collectorFragment_to_artistFragment"
             app:destination="@id/artistFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/artistFragment"
-        android:name="com.example.vinilos_front_mobile_mvtqn.ui.ArtistFragment"
-        android:label="artist_fragment"
-        tools:layout="@layout/artist_fragment" >
-        <action
-            android:id="@+id/action_artistFragment_to_albumFragment"
-            app:destination="@id/albumFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.vinilos_front_mobile_mvtqn.ui.AlbumFragment"
