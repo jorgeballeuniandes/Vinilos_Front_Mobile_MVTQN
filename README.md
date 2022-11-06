@@ -47,6 +47,7 @@ Proyecto de clase para Ingeniería de Software para Aplicaciones Móviles
 
 •	Finish
 
-APK
+**APK**
+
 https://github.com/jorgeballeuniandes/Vinilos_Front_Mobile_MVTQN/blob/main/APK/Vinilos.apk
 
