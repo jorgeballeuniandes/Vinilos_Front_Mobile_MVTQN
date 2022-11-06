@@ -1,7 +1,7 @@
 # Vinilos_Front_Mobile_MVTQN
 Proyecto de clase para Ingeniería de Software para Aplicaciones Móviles
 
-**Instrucciones**
+**INSTRUCCIONES**
 
 •	Clonar el repositorio
 
