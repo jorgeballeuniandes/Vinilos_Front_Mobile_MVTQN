@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="collector" type="com.grupo20.vinilos.modelos.Collector"/>
+        <variable name="artist" type="com.grupo20.vinilos.modelos.Artist"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,14 +26,20 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/collector_nombre"
+                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{collector.name}"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/black"
-                    />
-
+                    android:text="@{artist.name}" />
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{artist.description}" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{artist.image}" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
