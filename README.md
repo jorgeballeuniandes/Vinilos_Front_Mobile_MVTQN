@@ -4,6 +4,7 @@ Proyecto de clase para Ingeniería de Software para Aplicaciones Móviles
 **Instrucciones**
 
 •	Clonar el repositorio
+
 •	Abrirlo con Android Studio
 
 **SDK compatible Lollipop**
