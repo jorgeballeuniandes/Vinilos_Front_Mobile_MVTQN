@@ -3,10 +3,10 @@ Proyecto de clase para Ingeniería de Software para Aplicaciones Móviles
 
 **Instrucciones**
 
-Clonar el repositorio
+•	Clonar el repositorio
 •	Abrirlo con Android Studio
 
-SDK compatible Lollipop
+**SDK compatible Lollipop**
 •	Ir a SDK Manager menu superior, esquina derecha
 •	Buscar la version Lollipop 5.1 y en general las que se requieran para las pruebas
 •	Marcar el check y clic en Ok para que empiece la descarga
