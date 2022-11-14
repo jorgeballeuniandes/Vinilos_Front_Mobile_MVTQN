@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.artists.detail_artist.ArtistDetailFragment">
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_margin="20dp"
+android:background="@drawable/background"
+android:orientation="vertical"
+tools:context=".ui.artists.ArtistFragment"
+android:layout_marginStart="16dp"
+android:layout_marginEnd="16dp"
+android:id="@+id/artists_list_view">
 
     <TextView
-        android:id="@+id/Hola"
+        android:id="@+id/artists_view_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/title_artist_info"
+        android:textAlignment="center"
+        android:textColor="@color/azul"
+        android:textSize="20sp" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/Nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_text"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        app:shapeAppearanceOverlay="@style/roundImageView"/>
+
+</LinearLayout>

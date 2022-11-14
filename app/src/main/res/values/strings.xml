@@ -6,4 +6,5 @@
     <string name="title_collectors">Collectors List</string>
     <string name="title_artists">Artists List</string>
     <string name="title_albums">Albums</string>
+    <string name="title_artist_info">Artist Info</string>
 </resources>

@@ -6,14 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.imageview.ShapeableImageView
 import com.grupo20.vinilos.R
 
 class ArtistDetailFragment : Fragment() {
 
-    val args: ArtistDetailFragmentArgs by navArgs()
-
+    private val args: ArtistDetailFragmentArgs by navArgs()
+    val artist = args.artist
     companion object {
         fun newInstance() = ArtistDetailFragment()
     }
@@ -35,8 +37,10 @@ class ArtistDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val hello: TextView = view.findViewById(R.id.Hola)
-        hello.text = args.artist.name
+        val Nombre: TextView = view.findViewById(R.id.Nombre)
+        val Imagen:ShapeableImageView = view.findViewById(R.id.image_text)
+        Nombre.text = artist.name
+        //Imagen.setBackgroundDrawable  (artist.image)
     }
 
 
