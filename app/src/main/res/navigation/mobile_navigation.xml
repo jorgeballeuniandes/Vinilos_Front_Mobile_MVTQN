@@ -27,5 +27,20 @@
         android:id="@+id/navigation_artists"
         android:name="com.grupo20.vinilos.ui.artists.ArtistFragment"
         android:label="@string/title_artists"
-        tools:layout="@layout/fragment_artists" />
+        tools:layout="@layout/fragment_artists" >
+        <action
+            android:id="@+id/action_navigation_artists_to_artistDetailFragment"
+            app:destination="@id/artistDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/artistDetailFragment"
+        android:name="com.grupo20.vinilos.ui.artists.detail_artist.ArtistDetailFragment"
+        android:label="fragment_artist_detail"
+        tools:layout="@layout/fragment_artist_detail" >
+        <action
+            android:id="@+id/action_artistDetailFragment_to_navigation_artists"
+            app:destination="@id/navigation_artists" />
+        <argument android:name="Artist"
+            app:argType="com.grupo20.vinilos.modelos.Artist" />
+    </fragment>
 </navigation>
