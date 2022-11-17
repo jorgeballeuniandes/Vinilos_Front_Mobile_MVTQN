@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_margin="20dp"
+android:background="@drawable/background"
+android:orientation="vertical"
+tools:context=".ui.albums.add_album.CreateAlbumFragment"
+android:layout_marginStart="16dp"
+android:layout_marginEnd="16dp"
+android:id="@+id/artists_list_view">
+
+
+<TextView
+    android:id="@+id/tvw_album_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:text="@string/album_name" />
+
+<EditText
+    android:id="@+id/txt_album_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:ems="10"
+    android:inputType="textPersonName" />
+
+<TextView
+    android:id="@+id/tvw_album_description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:text="@string/album_description" />
+
+<EditText
+    android:id="@+id/txt_album_description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:ems="10"
+    android:inputType="textPersonName" />
+
+<TextView
+    android:id="@+id/tvw_album_genre"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:text="@string/album_genre" />
+
+<EditText
+    android:id="@+id/txt_album_genre"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:ems="10"
+    android:inputType="textPersonName" />
+
+<TextView
+    android:id="@+id/tvw_album_record_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:text="@string/album_record_label" />
+
+<EditText
+    android:id="@+id/txt_album_record_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:ems="10"
+    android:inputType="textPersonName" />
+
+<TextView
+    android:id="@+id/tvw_album_release_date"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:text="@string/album_release_date" />
+
+<EditText
+    android:id="@+id/txt_album_release_date"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:ems="10"
+    android:inputType="date" />
+
+<TextView
+    android:id="@+id/tvw_album_cover"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:text="@string/album_cover" />
+
+<EditText
+    android:id="@+id/txt_album_cover"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:ems="10"
+    android:inputType="textPersonName" />
+
+<Button
+    android:id="@+id/btn_submit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/button_submit" />
+
+
+</LinearLayout>
