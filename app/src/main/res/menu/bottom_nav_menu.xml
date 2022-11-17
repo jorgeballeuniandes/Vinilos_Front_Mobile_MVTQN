@@ -6,8 +6,8 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/navigation_add_album"
-        android:icon="@drawable/ic_albums"
+        android:id="@+id/navigation_create_album"
+        android:icon="@drawable/ic_create_album"
         android:title="@string/tittle_add_album" />
     <item
         android:id="@+id/navigation_albums"
