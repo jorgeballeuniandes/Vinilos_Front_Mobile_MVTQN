@@ -14,9 +14,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.grupo20.vinilos.R
 import com.grupo20.vinilos.ui.artists.ArtistFragmentDirections
@@ -64,22 +68,15 @@ class ArtistDetailFragment : Fragment() {
             navigator?.navigate(action)
         }
 
-        val executor = Executors.newSingleThreadExecutor()
-        val handler = Handler(Looper.getMainLooper())
-        var image: Bitmap? = null
+        Glide.with(this)
+            .load(artist.image.toUri().buildUpon().scheme("https").build())
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.ic_artists_black_24dp)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .error(R.drawable.ic_artists_black_24dp))
+            .into(imagen)
 
-        executor.execute {
-            try {
-                val `in` = java.net.URL(artist.image).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-                handler.post {
-                    imagen.setImageBitmap(image)
-                }
-            }
-            catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
     }
 
 
