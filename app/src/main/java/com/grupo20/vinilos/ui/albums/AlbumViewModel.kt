@@ -1,9 +1,13 @@
 package com.grupo20.vinilos.ui.albums
 
 import android.app.Application
+import android.support.v4.os.IResultReceiver.Default
 import androidx.lifecycle.*
 import com.grupo20.vinilos.modelos.Album
 import com.grupo20.vinilos.repositories.AlbumRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
 
@@ -29,13 +33,21 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
     }
 
     private fun refreshDataFromNetwork() {
-        albumsRepository.refreshData({
-            _albums.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            _eventNetworkError.value = true
-        })
+
+        try {
+            viewModelScope.launch (Dispatchers.Default) {
+                withContext(Dispatchers.IO){
+                    var data = albumsRepository.refreshData()
+                    _albums.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        } catch (e:Exception){
+            _eventNetworkError.value=true
+        }
+
+
     }
 
     fun onNetworkErrorShown() {
