@@ -5,6 +5,9 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.grupo20.vinilos.modelos.Collector
 import com.grupo20.vinilos.repositories.CollectorsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CollectorsViewModel (application: Application) :  AndroidViewModel(application) {
 
@@ -30,14 +33,22 @@ class CollectorsViewModel (application: Application) :  AndroidViewModel(applica
     }
 
     private fun refreshDataFromNetwork() {
-        collectorsRepository.refreshData({
-            _collectors.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            Log.d("Error", it.toString())
+        try{
+            viewModelScope.launch (Dispatchers.Default) {
+                withContext(Dispatchers.IO){
+                    var data = collectorsRepository.refreshData()
+                    _collectors.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+
+            }
+
+        }
+        catch(e:Exception){
+            Log.d("Error", e.toString())
             _eventNetworkError.value = true
-        })
+        }
     }
 
     fun onNetworkErrorShown() {

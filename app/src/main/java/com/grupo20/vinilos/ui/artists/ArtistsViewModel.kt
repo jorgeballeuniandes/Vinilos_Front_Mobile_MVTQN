@@ -4,7 +4,11 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.grupo20.vinilos.modelos.Artist
+import com.grupo20.vinilos.repositories.AlbumRepository
 import com.grupo20.vinilos.repositories.ArtistsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ArtistViewModel(application: Application) :  AndroidViewModel(application) {
 
@@ -30,14 +34,23 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
     }
 
     private fun refreshDataFromNetwork() {
-        artistsRepository.refreshData({
-            _artists.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            Log.d("Error", it.toString())
+
+        try{
+            viewModelScope.launch (Dispatchers.Default) {
+                withContext(Dispatchers.IO){
+                    var data = artistsRepository.refreshData()
+                    _artists.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+
+            }
+
+        }
+        catch(e:Exception){
+            Log.d("Error", e.toString())
             _eventNetworkError.value = true
-        })
+        }
     }
 
     fun onNetworkErrorShown() {
