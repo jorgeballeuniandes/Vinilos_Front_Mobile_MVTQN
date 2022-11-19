@@ -1,5 +1,6 @@
 package com.grupo20.vinilos.ui.artists.detail_artist
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.Image
@@ -14,12 +15,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.grupo20.vinilos.R
 import com.grupo20.vinilos.ui.artists.ArtistFragmentDirections
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.concurrent.Executors
 
 class ArtistDetailFragment : Fragment() {
@@ -47,6 +54,7 @@ class ArtistDetailFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val nombre: TextView = view.findViewById(R.id.nombre)
@@ -54,32 +62,27 @@ class ArtistDetailFragment : Fragment() {
         val birth: TextView = view.findViewById(R.id.birth)
         val imagen: ImageView = view.findViewById(R.id.foto)
         val back: Button = view.findViewById(R.id.back)
-        var navigator: NavController = findNavController()
+        val navigator: NavController = findNavController()
+        val format = SimpleDateFormat("yyyy-MM-dd")
 
         nombre.text = artist.name
         descripcion.text = artist.description
+        birth.text = "BirthDate: " + format.format(artist.birthDate)
 
         back.setOnClickListener {
             val action = ArtistDetailFragmentDirections.actionArtistDetailFragmentToNavigationArtists()
             navigator?.navigate(action)
         }
 
-        val executor = Executors.newSingleThreadExecutor()
-        val handler = Handler(Looper.getMainLooper())
-        var image: Bitmap? = null
+        Glide.with(this)
+            .load(artist.image.toUri().buildUpon().scheme("https").build())
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.ic_artists_black_24dp)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .error(R.drawable.ic_artists_black_24dp))
+            .into(imagen)
 
-        executor.execute {
-            try {
-                val `in` = java.net.URL(artist.image).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-                handler.post {
-                    imagen.setImageBitmap(image)
-                }
-            }
-            catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
     }
 
 
