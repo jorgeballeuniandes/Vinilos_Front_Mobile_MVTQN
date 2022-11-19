@@ -16,6 +16,7 @@ import com.grupo20.vinilos.modelos.Comment
 
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -93,8 +94,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val list = mutableListOf<Artist>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-
-                    list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), description = item.getString("description"), image = item.getString("image"),))
+                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'")
+                    list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), description = item.getString("description"), image = item.getString("image"), birthDate = format.parse(item.getString("birthDate"))))
                 }
                 cont.resume(list)
             },

@@ -1,5 +1,6 @@
 package com.grupo20.vinilos.ui.artists.detail_artist
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.Image
@@ -24,6 +25,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.grupo20.vinilos.R
 import com.grupo20.vinilos.ui.artists.ArtistFragmentDirections
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.concurrent.Executors
 
 class ArtistDetailFragment : Fragment() {
@@ -51,6 +54,7 @@ class ArtistDetailFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val nombre: TextView = view.findViewById(R.id.nombre)
@@ -58,10 +62,12 @@ class ArtistDetailFragment : Fragment() {
         val birth: TextView = view.findViewById(R.id.birth)
         val imagen: ImageView = view.findViewById(R.id.foto)
         val back: Button = view.findViewById(R.id.back)
-        var navigator: NavController = findNavController()
+        val navigator: NavController = findNavController()
+        val format = SimpleDateFormat("yyyy-MM-dd")
 
         nombre.text = artist.name
         descripcion.text = artist.description
+        birth.text = "BirthDate: " + format.format(artist.birthDate)
 
         back.setOnClickListener {
             val action = ArtistDetailFragmentDirections.actionArtistDetailFragmentToNavigationArtists()
