@@ -2,6 +2,7 @@ package com.grupo20.vinilos.ui.albums
 
 import android.app.Application
 import android.support.v4.os.IResultReceiver.Default
+import android.util.Log
 import androidx.lifecycle.*
 import com.grupo20.vinilos.modelos.Album
 import com.grupo20.vinilos.repositories.AlbumRepository
@@ -43,11 +44,10 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
-        } catch (e:Exception){
-            _eventNetworkError.value=true
+        } catch (e:Exception) {
+            Log.d("Error", e.toString())
+            _eventNetworkError.value = true
         }
-
-
     }
 
     fun onNetworkErrorShown() {

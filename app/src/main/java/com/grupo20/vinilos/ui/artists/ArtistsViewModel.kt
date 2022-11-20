@@ -35,7 +35,7 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
 
     private fun refreshDataFromNetwork() {
 
-        try{
+        try {
             viewModelScope.launch (Dispatchers.Default) {
                 withContext(Dispatchers.IO){
                     var data = artistsRepository.refreshData()
@@ -43,11 +43,8 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
-
             }
-
-        }
-        catch(e:Exception){
+        } catch (e:Exception) {
             Log.d("Error", e.toString())
             _eventNetworkError.value = true
         }

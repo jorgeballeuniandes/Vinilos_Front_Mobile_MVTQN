@@ -43,7 +43,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="24"
-                    android:text="@{artist.name}" />
+                    android:text="@{artist.name}"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
