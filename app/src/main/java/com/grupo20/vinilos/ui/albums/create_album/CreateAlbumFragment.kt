@@ -8,7 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.Toast
+import com.android.volley.VolleyError
+import com.google.android.material.textfield.TextInputLayout
 import com.grupo20.vinilos.R
+import org.json.JSONObject
 
 class CreateAlbumFragment : Fragment() {
 
@@ -34,6 +39,11 @@ class CreateAlbumFragment : Fragment() {
         val autoCompleteRecords = createview.findViewById<AutoCompleteTextView>(R.id.autoComplete_records)
         val recordAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_expandable_list_item_1, recordsArray)
         autoCompleteRecords?.setAdapter(recordAdapter)
+
+        val postButton = createview.findViewById<Button>(R.id.btn_create_track_Album)
+        postButton.setOnClickListener { view ->
+            sendFrom(createview)
+        }
         return createview
     }
 
@@ -41,6 +51,41 @@ class CreateAlbumFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CreateAlbumViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    fun sendFrom( createview:View){
+        val name = createview.findViewById<TextInputLayout>(R.id.textInputLayout_name).editText?.text
+        val cover = createview.findViewById<TextInputLayout>(R.id.textInputLayout_urlCover).editText?.text
+        val description = createview.findViewById<TextInputLayout>(R.id.textInputLayout_description).editText?.text
+        val releaseDate = createview.findViewById<TextInputLayout>(R.id.textInputLayout_date).editText?.text
+        val record = createview.findViewById<AutoCompleteTextView>(R.id.autoComplete_records).text
+        val genders = createview.findViewById<AutoCompleteTextView>(R.id.autoComplete_generos).text
+
+        if (!name.isNullOrEmpty() && !cover.isNullOrEmpty() && !description.isNullOrEmpty()
+            && !releaseDate.isNullOrEmpty() && !record.isNullOrEmpty() && !genders.isNullOrEmpty()){
+            val dataMap: HashMap<Any?, Any?> = HashMap<Any?, Any?>()
+            dataMap.put("name", name)
+            dataMap.put("cover",cover)
+            dataMap.put("description",description)
+            dataMap.put("releaseDate",releaseDate)
+            dataMap.put("recordLabel",record)
+            dataMap.put("genders",genders)
+
+            Toast.makeText(activity, JSONObject(dataMap).toString(), Toast.LENGTH_SHORT).show()
+
+            //"id":100,"name":"a","cover":"a","releaseDate":"1984-08-01T00:00:00.000Z","description":"a","genre":"a","recordLabel":"a"}
+            viewModel.enviarFormulario(dataMap, ::onComplete, ::onError)
+        }else{
+            Toast.makeText(activity, "you need to fill all the parameters", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun onComplete(resp: JSONObject){
+        Toast.makeText(activity, "Your album has been created", Toast.LENGTH_SHORT).show()
+    }
+    fun onError(error: VolleyError){
+        Toast.makeText(activity, "Error: " + error.networkResponse.data, Toast.LENGTH_SHORT).show()
+
     }
 
 }
