@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_create_album"
-        android:name="com.grupo20.vinilos.ui.albums.add_album.CreateAlbumFragment"
+        android:name="com.grupo20.vinilos.ui.albums.create_album.CreateAlbumFragment"
         android:label="@string/tittle_add_album"
         tools:layout="@layout/fragment_create_album" />
 

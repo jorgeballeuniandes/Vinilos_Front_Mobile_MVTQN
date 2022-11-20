@@ -1,4 +1,4 @@
-package com.grupo20.vinilos.ui.albums.add_album
+package com.grupo20.vinilos.ui.albums.create_album
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.grupo20.vinilos.R
 
 class CreateAlbumFragment : Fragment() {
+
+    private lateinit var binding: CreateAlbumFragment
 
     companion object {
         fun newInstance() = CreateAlbumFragment()
