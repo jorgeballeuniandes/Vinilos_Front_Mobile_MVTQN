@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Vinilos</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_collectors">Collectors List</string>
     <string name="title_artists">Artists List</string>
     <string name="title_albums">Albums</string>
@@ -11,4 +9,5 @@
     <string name="performer_prizes">Performer Prizes</string>
     <string name="btnAlbums">Albums</string>
     <string name="back">back</string>
+    <string name="list">List</string>
 </resources>

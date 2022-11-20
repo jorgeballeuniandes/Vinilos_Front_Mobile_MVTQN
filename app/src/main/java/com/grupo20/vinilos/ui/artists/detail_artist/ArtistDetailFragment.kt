@@ -29,6 +29,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.concurrent.Executors
 
+@Suppress("DEPRECATION")
 class ArtistDetailFragment : Fragment() {
 
     private val args: ArtistDetailFragmentArgs by navArgs()
@@ -48,6 +49,7 @@ class ArtistDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_artist_detail, container, false)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ArtistDetailViewModel::class.java)
@@ -71,7 +73,7 @@ class ArtistDetailFragment : Fragment() {
 
         back.setOnClickListener {
             val action = ArtistDetailFragmentDirections.actionArtistDetailFragmentToNavigationArtists()
-            navigator?.navigate(action)
+            navigator.navigate(action)
         }
 
         Glide.with(this)

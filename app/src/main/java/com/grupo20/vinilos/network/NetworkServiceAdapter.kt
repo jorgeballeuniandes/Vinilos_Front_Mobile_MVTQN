@@ -17,13 +17,14 @@ import com.grupo20.vinilos.modelos.Comment
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL= "https://back-vinyls-populated.herokuapp.com/"
+        const val BASE_URL= "https://vinilos-back-end.herokuapp.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -38,7 +39,7 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
     suspend fun getAlbums():List<Album> = suspendCoroutine {  cont->
         requestQueue.add(getRequest("albums",
-            Response.Listener<String> { response ->
+            { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
                 for (i in 0 until resp.length()) {
@@ -47,14 +48,14 @@ class NetworkServiceAdapter constructor(context: Context) {
                 }
                 cont.resume(list)
             },
-            Response.ErrorListener {
+            {
                 cont.resumeWithException(it)
             }))
     }
     suspend fun getCollectors():List<Collector> = suspendCoroutine <List<Collector>>{ cont->
 
         requestQueue.add(getRequest("collectors",
-            Response.Listener<String> { response ->
+            { response ->
                 Log.d("tagb", response)
                 val resp = JSONArray(response)
                 val list = mutableListOf<Collector>()
@@ -64,7 +65,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 }
                 cont.resume(list)
             },
-            Response.ErrorListener {
+            {
                 cont.resumeWithException(it)
                 Log.d("", it.message.toString())
             }))
@@ -72,10 +73,10 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
     fun getComments(albumId:Int, onComplete:(resp:List<Comment>)->Unit, onError: (error:VolleyError)->Unit) {
         requestQueue.add(getRequest("albums/$albumId/comments",
-            Response.Listener<String> { response ->
+            { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Comment>()
-                var item:JSONObject? = null
+                var item:JSONObject?
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
                     Log.d("Response", item.toString())
@@ -83,23 +84,24 @@ class NetworkServiceAdapter constructor(context: Context) {
                 }
                 onComplete(list)
             },
-            Response.ErrorListener {
+            {
                 onError(it)
             }))
     }
+
     suspend fun getArtists():List<Artist> = suspendCoroutine{ cont->
         requestQueue.add(getRequest("musicians",
-            Response.Listener<String> { response ->
+            { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Artist>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'")
-                    list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), description = item.getString("description"), image = item.getString("image"), birthDate = format.parse(item.getString("birthDate"))))
+                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'", java.util.Locale.getDefault())
+                    list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), description = item.getString("description"), image = item.getString("image"), birthDate = format.parse(item.getString("birthDate")) as Date))
                 }
                 cont.resume(list)
             },
-            Response.ErrorListener {
+            {
                 cont.resumeWithException(it)
             }))
 
@@ -107,10 +109,10 @@ class NetworkServiceAdapter constructor(context: Context) {
     fun postComment(body: JSONObject, albumId: Int,  onComplete:(resp:JSONObject)->Unit , onError: (error:VolleyError)->Unit){
         requestQueue.add(postRequest("albums/$albumId/comments",
             body,
-            Response.Listener<JSONObject> { response ->
+            { response ->
                 onComplete(response)
             },
-            Response.ErrorListener {
+            {
                 onError(it)
             }))
     }
