@@ -1,5 +1,6 @@
 package com.grupo20.vinilos.network
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import com.android.volley.Request
@@ -23,7 +24,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL= "https://back-vinyls-populated.herokuapp.com/"
+        const val BASE_URL= "https://vinilos-back-end.herokuapp.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -87,19 +88,20 @@ class NetworkServiceAdapter constructor(context: Context) {
                 onError(it)
             }))
     }
+
     suspend fun getArtists():List<Artist> = suspendCoroutine{ cont->
         requestQueue.add(getRequest("musicians",
-            Response.Listener<String> { response ->
+            { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Artist>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'")
+                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'", java.util.Locale.getDefault())
                     list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), description = item.getString("description"), image = item.getString("image"), birthDate = format.parse(item.getString("birthDate"))))
                 }
                 cont.resume(list)
             },
-            Response.ErrorListener {
+            {
                 cont.resumeWithException(it)
             }))
 
