@@ -1,5 +1,6 @@
 package com.grupo20.vinilos.ui.artists
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.grupo20.vinilos.ui.artists.detail_artist.ArtistDetailFragment
 class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>(){
 
     var artists :List<Artist> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()

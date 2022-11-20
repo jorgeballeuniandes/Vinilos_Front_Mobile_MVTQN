@@ -14,6 +14,7 @@ import com.grupo20.vinilos.databinding.FragmentAlbumBinding
 import com.grupo20.vinilos.R
 import com.grupo20.vinilos.modelos.Album
 
+@Suppress("DEPRECATION")
 class AlbumFragment : Fragment() {
     private var _binding: FragmentAlbumBinding? = null
     private val binding get() = _binding!!
@@ -37,6 +38,7 @@ class AlbumFragment : Fragment() {
         recyclerView.adapter = viewModelAdapter
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {

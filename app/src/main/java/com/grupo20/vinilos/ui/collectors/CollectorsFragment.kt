@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grupo20.vinilos.databinding.FragmentCollectorsBinding
 import com.grupo20.vinilos.modelos.Collector
 
+@Suppress("DEPRECATION")
 class CollectorsFragment : Fragment() {
 
     private var _binding: FragmentCollectorsBinding? = null
@@ -38,6 +39,7 @@ class CollectorsFragment : Fragment() {
         recyclerView.adapter = viewModelAdapter
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CollectorsViewModel::class.java)
