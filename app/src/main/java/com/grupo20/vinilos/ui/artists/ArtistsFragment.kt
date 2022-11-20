@@ -8,12 +8,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.grupo20.vinilos.databinding.FragmentArtistsBinding
 import com.grupo20.vinilos.modelos.Artist
 import com.grupo20.vinilos.R
 
+@Suppress("DEPRECATION")
 class ArtistFragment : Fragment() {
     private var _binding: FragmentArtistsBinding? = null
     private val binding get() = _binding!!
@@ -28,6 +30,7 @@ class ArtistFragment : Fragment() {
         _binding = FragmentArtistsBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = ArtistsAdapter()
+        viewModelAdapter?.navigator = findNavController()
         return view
     }
 
@@ -37,6 +40,7 @@ class ArtistFragment : Fragment() {
         recyclerView.adapter = viewModelAdapter
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
