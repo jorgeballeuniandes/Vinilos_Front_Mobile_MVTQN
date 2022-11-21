@@ -27,7 +27,8 @@ class AlbumFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+        ): View? {
+        _binding = null
         _binding = FragmentAlbumBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
@@ -58,10 +59,13 @@ class AlbumFragment : Fragment() {
             if (isNetworkError) onNetworkError()
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 
     private fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {

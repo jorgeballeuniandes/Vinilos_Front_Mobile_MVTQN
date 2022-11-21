@@ -3,9 +3,8 @@ package com.grupo20.vinilos.ui.albums.create_album
 import android.app.Application
 import androidx.lifecycle.*
 import com.android.volley.VolleyError
-import com.grupo20.vinilos.modelos.Artist
 import com.grupo20.vinilos.repositories.AlbumRepository
-import com.grupo20.vinilos.repositories.ArtistsRepository
+import com.grupo20.vinilos.ui.albums.AlbumsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,6 +13,7 @@ import org.json.JSONObject
 class CreateAlbumViewModel (application: Application) :  AndroidViewModel(application) {
 
     private val albumsRepository = AlbumRepository(application)
+    private var albumsViewModelAdapter: AlbumsAdapter? = null
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 

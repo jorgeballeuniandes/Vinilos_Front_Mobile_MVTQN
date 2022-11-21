@@ -38,6 +38,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
+
         holder.viewDataBinding.also {
             it.album = albums[position]
         }

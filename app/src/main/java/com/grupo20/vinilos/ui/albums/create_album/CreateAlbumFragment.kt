@@ -10,14 +10,18 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.android.volley.VolleyError
 import com.google.android.material.textfield.TextInputLayout
 import com.grupo20.vinilos.R
 import org.json.JSONObject
+import com.grupo20.vinilos.ui.albums.AlbumsAdapter
 
 class CreateAlbumFragment : Fragment() {
 
     private lateinit var binding: CreateAlbumFragment
+    private var albumsViewModelAdapter: AlbumsAdapter? = null
 
     companion object {
         fun newInstance() = CreateAlbumFragment()
@@ -29,6 +33,8 @@ class CreateAlbumFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        albumsViewModelAdapter = AlbumsAdapter()
         val createview = inflater.inflate(R.layout.fragment_create_album, container, false)
         val generosArray = resources.getStringArray(R.array.list_generos)
         val autoCompleteGeneros = createview.findViewById<AutoCompleteTextView>(R.id.autoComplete_generos)
@@ -64,24 +70,28 @@ class CreateAlbumFragment : Fragment() {
         if (!name.isNullOrEmpty() && !cover.isNullOrEmpty() && !description.isNullOrEmpty()
             && !releaseDate.isNullOrEmpty() && !record.isNullOrEmpty() && !genders.isNullOrEmpty()){
             val dataMap: HashMap<Any?, Any?> = HashMap<Any?, Any?>()
-            dataMap.put("name", name)
-            dataMap.put("cover",cover)
-            dataMap.put("description",description)
-            dataMap.put("releaseDate",releaseDate)
-            dataMap.put("recordLabel",record)
-            dataMap.put("genders",genders)
-
-            Toast.makeText(activity, JSONObject(dataMap).toString(), Toast.LENGTH_SHORT).show()
-
+            dataMap.put("name", name.toString())
+            dataMap.put("cover",cover.toString())
+            dataMap.put("description",description.toString())
+            dataMap.put("releaseDate",releaseDate.toString())
+            dataMap.put("recordLabel",record.toString())
+            dataMap.put("genre",genders.toString())
             //"id":100,"name":"a","cover":"a","releaseDate":"1984-08-01T00:00:00.000Z","description":"a","genre":"a","recordLabel":"a"}
             viewModel.enviarFormulario(dataMap, ::onComplete, ::onError)
+
+
+
         }else{
             Toast.makeText(activity, "you need to fill all the parameters", Toast.LENGTH_SHORT).show()
+
         }
     }
 
     fun onComplete(resp: JSONObject){
         Toast.makeText(activity, "Your album has been created", Toast.LENGTH_SHORT).show()
+        albumsViewModelAdapter?.notifyDataSetChanged()
+        this.findNavController().navigate(R.id.navigation_create_album)
+
     }
     fun onError(error: VolleyError){
         Toast.makeText(activity, "Error: " + error.networkResponse.data, Toast.LENGTH_SHORT).show()

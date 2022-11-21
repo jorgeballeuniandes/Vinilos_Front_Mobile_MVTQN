@@ -9,7 +9,7 @@
     <string name="album_description">Description</string>
     <string name="album_genre">Genre</string>
     <string name="album_record_label">Record Label</string>
-    <string name="album_release_date">Release Date</string>
+    <string name="album_release_date">Release Date (DD/MM/YYYY)</string>
     <string name="album_cover">Cover</string>
     <string name="button_submit">Submit</string>
     <string name="tittle_add_album">Add Album</string>
