@@ -42,13 +42,12 @@ public class TestVinilos_pr006 {
         Thread.sleep(1000);
         ViewInteraction albumNameText = onView((allOf(withId(R.id.txt_name_album), isDisplayed())));
         albumNameText.perform(swipeUp());
-        albumNameText.perform(swipeUp());
         albumNameText.perform(click());
         albumNameText.perform( typeText("OK Computer"));
         Thread.sleep(1000);
         albumNameText.perform(swipeUp());
-        albumNameText.perform(swipeUp());
         ViewInteraction albumUrlCoverText = onView((allOf(withId(R.id.txt_url_cover_album), isDisplayed())));
+        albumUrlCoverText.perform(click());
         albumUrlCoverText.perform(click());
         albumUrlCoverText.perform( typeText("https://en.wikipedia.org/wiki/OK_Computer#/media/File:Radioheadokcomputer.png"));
         Thread.sleep(1000);
