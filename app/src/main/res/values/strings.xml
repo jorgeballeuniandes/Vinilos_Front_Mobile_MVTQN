@@ -3,11 +3,36 @@
     <string name="title_home">Home</string>
     <string name="title_collectors">Collectors List</string>
     <string name="title_artists">Artists List</string>
-    <string name="title_albums">Albums</string>
+    <string name="title_albums">Albums List</string>
+    <string name="title_create_album">Add Album</string>
+    <string name="album_name">Name</string>
+    <string name="album_description">Description</string>
+    <string name="album_genre">Genre</string>
+    <string name="album_record_label">Record Label</string>
+    <string name="album_release_date">Release Date (DD/MM/YYYY)</string>
+    <string name="album_cover">Cover</string>
+    <string name="button_submit">Submit</string>
+    <string name="tittle_add_album">Add Album</string>
+    <string-array name="list_generos">
+        <item>Classical</item>
+        <item>Folk</item>
+        <item>Rock</item>
+        <item>Salsa</item>
+    </string-array>
+    <string-array name="list_records">
+        <item>Sony Music</item>
+        <item>EMI</item>
+        <item>Discos Fuentes</item>
+        <item>Elektra</item>
+        <item>Fania Records</item>
+    </string-array>
     <string name="title_artist_info">Artist Info</string>
     <string name="foto">Foto</string>
     <string name="performer_prizes">Performer Prizes</string>
     <string name="btnAlbums">Albums</string>
     <string name="back">back</string>
     <string name="list">List</string>
+    <string name="submit_add_album_btn">Click to create new album</string>
+    <string name="form_add_album_genre">Genre</string>
+    <string name="form_add_album_heading_text">Please fill all fields</string>
 </resources>

@@ -21,8 +21,6 @@ import com.grupo20.vinilos.databinding.ArtistItemBinding
 import com.grupo20.vinilos.modelos.Artist
 import com.grupo20.vinilos.ui.artists.detail_artist.ArtistDetailFragment
 
-
-
 class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>(){
 
     var artists :List<Artist> = emptyList()
@@ -45,7 +43,6 @@ class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>(){
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.artist = artists[position]
-
         }
         holder.bind(artists[position])
         holder.viewDataBinding.root.setOnClickListener {
@@ -57,7 +54,6 @@ class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>(){
     override fun getItemCount(): Int {
         return artists.size
     }
-
 
     class ArtistViewHolder(val viewDataBinding: ArtistItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
