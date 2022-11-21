@@ -46,7 +46,7 @@ class CreateAlbumFragment : Fragment() {
         val recordAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_expandable_list_item_1, recordsArray)
         autoCompleteRecords?.setAdapter(recordAdapter)
 
-        val postButton = createview.findViewById<Button>(R.id.btn_create_track_Album)
+        val postButton = createview.findViewById<Button>(R.id.btn_create_Album)
         postButton.setOnClickListener { view ->
             sendFrom(createview)
         }
