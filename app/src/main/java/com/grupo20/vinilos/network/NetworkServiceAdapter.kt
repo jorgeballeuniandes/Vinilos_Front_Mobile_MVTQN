@@ -44,7 +44,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val list = mutableListOf<Album>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
+                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'", java.util.Locale.getDefault())
+                    list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = format.parse(item.getString("releaseDate")) as Date, genre = item.getString("genre"), description = item.getString("description")))
                 }
                 cont.resume(list)
             },

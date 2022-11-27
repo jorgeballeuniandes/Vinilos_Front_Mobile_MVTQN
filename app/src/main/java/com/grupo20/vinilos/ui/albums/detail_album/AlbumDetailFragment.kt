@@ -1,4 +1,4 @@
-package com.grupo20.vinilos.ui.artists.detail_artist
+package com.grupo20.vinilos.ui.albums.detail_album
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
@@ -21,62 +21,60 @@ import com.grupo20.vinilos.R
 import java.text.SimpleDateFormat
 
 @Suppress("DEPRECATION")
-class ArtistDetailFragment : Fragment() {
+class AlbumDetailFragment : Fragment() {
 
-    private val args: ArtistDetailFragmentArgs by navArgs()
-    private val artist by lazy{
-        args.artist
+    private val args: AlbumDetailFragmentArgs by navArgs()
+    private val album by lazy{
+        args.album
     }
 
     companion object {
-        fun newInstance() = ArtistDetailFragment()
+        fun newInstance() = AlbumDetailFragment()
     }
 
-    private lateinit var viewModel: ArtistDetailViewModel
+    private lateinit var viewModel: AlbumDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_artist_detail, container, false)
+        return inflater.inflate(R.layout.fragment_album_detail, container, false)
     }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ArtistDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AlbumDetailViewModel::class.java)
     }
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val nombre: TextView = view.findViewById(R.id.nombre)
-        val descripcion: TextView = view.findViewById(R.id.descripcion)
-        val birth: TextView = view.findViewById(R.id.birth)
-        val imagen: ImageView = view.findViewById(R.id.foto)
-        val back: Button = view.findViewById(R.id.back)
+        val txt_album_name: TextView = view.findViewById(R.id.txt_album_name)
+        val txt_album_description: TextView = view.findViewById(R.id.txt_album_description)
+        val txt_album_release_date: TextView = view.findViewById(R.id.txt_album_release_date)
+        val imagen: ImageView = view.findViewById(R.id.imv_album_cover)
+        val back: Button = view.findViewById(R.id.btn_back)
         val navigator: NavController = findNavController()
         val format = SimpleDateFormat("yyyy-MM-dd")
 
-        nombre.text = artist.name
-        descripcion.text = artist.description
-        birth.text = "BirthDate: " + format.format(artist.birthDate)
+        txt_album_name.text = album.name
+        txt_album_description.text = album.description
+        txt_album_release_date.text = "Release Date: " + format.format(album.releaseDate)
 
         back.setOnClickListener {
-            val action = ArtistDetailFragmentDirections.actionArtistDetailFragmentToNavigationArtists()
+            val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToNavigationAlbums()
             navigator.navigate(action)
         }
 
         Glide.with(this)
-            .load(artist.image.toUri().buildUpon().scheme("https").build())
+            .load(album.cover.toUri().buildUpon().scheme("https").build())
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_artists_black_24dp)
+                    .placeholder(R.drawable.ic_albums)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .error(R.drawable.ic_artists_black_24dp))
+                    .error(R.drawable.ic_albums))
             .into(imagen)
+        }
 
     }
-
-
-}

@@ -1,17 +1,12 @@
 package com.grupo20.vinilos.ui.artists
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.commit
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -19,7 +14,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.grupo20.vinilos.R
 import com.grupo20.vinilos.databinding.ArtistItemBinding
 import com.grupo20.vinilos.modelos.Artist
-import com.grupo20.vinilos.ui.artists.detail_artist.ArtistDetailFragment
 
 class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>(){
 
@@ -72,6 +66,4 @@ class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>(){
                 .into(viewDataBinding.imageText)
         }
     }
-
-
 }
