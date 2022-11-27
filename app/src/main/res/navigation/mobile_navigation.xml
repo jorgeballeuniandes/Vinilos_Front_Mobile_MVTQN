@@ -27,7 +27,11 @@
         android:id="@+id/navigation_albums"
         android:name="com.grupo20.vinilos.ui.albums.AlbumFragment"
         android:label="@string/title_albums"
-        tools:layout="@layout/fragment_album" />
+        tools:layout="@layout/fragment_album" >
+        <action
+            android:id="@+id/action_navigation_albums_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_artists"
@@ -38,6 +42,7 @@
             android:id="@+id/action_navigation_artists_to_artistDetailFragment"
             app:destination="@id/artistDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/artistDetailFragment"
         android:name="com.grupo20.vinilos.ui.artists.detail_artist.ArtistDetailFragment"
@@ -48,5 +53,17 @@
             app:destination="@id/navigation_artists" />
         <argument android:name="Artist"
             app:argType="com.grupo20.vinilos.modelos.Artist" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumDetailFragment"
+        android:name="com.grupo20.vinilos.ui.albums.detail_album.AlbumDetailFragment"
+        android:label="fragment_album_detail"
+        tools:layout="@layout/fragment_album_detail" >
+        <action
+            android:id="@+id/action_albumDetailFragment_to_navigation_albums"
+            app:destination="@id/navigation_albums" />
+        <argument android:name="Album"
+            app:argType="com.grupo20.vinilos.modelos.Album" />
     </fragment>
 </navigation>

@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.grupo20.vinilos.databinding.FragmentArtistsBinding
-import com.grupo20.vinilos.modelos.Artist
 import com.grupo20.vinilos.R
+import com.grupo20.vinilos.modelos.Artist
 
 @Suppress("DEPRECATION")
 class ArtistFragment : Fragment() {
@@ -26,7 +26,7 @@ class ArtistFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+        ): View? {
         _binding = FragmentArtistsBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = ArtistsAdapter()
@@ -57,6 +57,7 @@ class ArtistFragment : Fragment() {
             if (isNetworkError) onNetworkError()
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
