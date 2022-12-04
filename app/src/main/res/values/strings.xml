@@ -39,4 +39,6 @@
     <string name="form_add_album_genre">Genre</string>
     <string name="form_add_album_heading_text">Please fill all fields</string>
     <string name="title_tracks">Album\'s Tracks</string>
+    <string name="no_tracks">No hay tracks asociados</string>
+    <string name="add_track">Add Track</string>
 </resources>

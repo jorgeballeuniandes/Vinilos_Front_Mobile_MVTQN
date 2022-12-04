@@ -51,8 +51,9 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
-    suspend fun getTracks():List<Track> = suspendCoroutine { cont->
-        requestQueue.add(getRequest("albums/100/tracks",
+    suspend fun getTracks(album: Int):List<Track> = suspendCoroutine { cont->
+        requestQueue.add(getRequest(
+            "albums/$album/tracks",
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Track>()

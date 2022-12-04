@@ -1,23 +1,26 @@
 package com.grupo20.vinilos.ui.tracks
 
-import androidx.lifecycle.ViewModelProvider
+import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isEmpty
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.grupo20.vinilos.R
-import com.grupo20.vinilos.databinding.FragmentAlbumBinding
 import com.grupo20.vinilos.databinding.FragmentTracksBinding
-import com.grupo20.vinilos.modelos.Album
 import com.grupo20.vinilos.modelos.Track
-import com.grupo20.vinilos.ui.albums.AlbumViewModel
-import com.grupo20.vinilos.ui.albums.AlbumsAdapter
+import com.grupo20.vinilos.ui.albums.detail_album.AlbumDetailFragmentDirections
+
 
 class TracksFragment : Fragment() {
     private var _binding: FragmentTracksBinding? = null
@@ -25,6 +28,11 @@ class TracksFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: TracksViewModel
     private var viewModelAdapter: TrackAdapter? = null
+
+    private val args: TracksFragmentArgs by navArgs()
+    private val album by lazy{
+        args.album
+    }
 
     companion object {
         fun newInstance() = TracksFragment()
@@ -45,6 +53,15 @@ class TracksFragment : Fragment() {
         recyclerView = binding.tracksRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
+
+        val back: Button = view.findViewById(com.grupo20.vinilos.R.id.btn_back)
+        val navigator: NavController = findNavController()
+
+        back.setOnClickListener {
+            val action = TracksFragmentDirections.actionTracksFragmentToAlbumDetailFragment(album)
+            navigator.navigate(action)
+        }
+
     }
 
     @Deprecated("Deprecated in Java")
@@ -53,8 +70,8 @@ class TracksFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.title_tracks)
-        viewModel = ViewModelProvider(this, TracksViewModel.Factory(activity.application))[TracksViewModel::class.java]
+        activity.actionBar?.title = getString(com.grupo20.vinilos.R.string.title_tracks)
+        viewModel = ViewModelProvider(this, TracksViewModel.Factory(activity.application, album))[TracksViewModel::class.java]
         viewModel.tracks.observe(viewLifecycleOwner, Observer<List<Track>> {
             it.apply {
                 viewModelAdapter!!.tracks = this
@@ -73,7 +90,7 @@ class TracksFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.refreshDataFromNetwork()
-        viewModel = ViewModelProvider(this, TracksViewModel.Factory(requireActivity().application)).get(TracksViewModel::class.java)
+        viewModel = ViewModelProvider(this, TracksViewModel.Factory(requireActivity().application, album)).get(TracksViewModel::class.java)
         viewModel.tracks.observe(viewLifecycleOwner, Observer<List<Track>> {
             it.apply {
                 viewModelAdapter!!.tracks = this
@@ -90,5 +107,4 @@ class TracksFragment : Fragment() {
             viewModel.onNetworkErrorShown()
         }
     }
-
 }

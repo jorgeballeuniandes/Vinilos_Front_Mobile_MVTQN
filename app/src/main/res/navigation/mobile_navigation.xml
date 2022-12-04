@@ -63,15 +63,23 @@
         <action
             android:id="@+id/action_albumDetailFragment_to_navigation_albums"
             app:destination="@id/navigation_albums" />
-        <argument android:name="Album"
-            app:argType="com.grupo20.vinilos.modelos.Album" />
         <action
             android:id="@+id/action_albumDetailFragment_to_tracksFragment"
             app:destination="@id/tracksFragment" />
+        <argument
+            android:name="Album"
+            app:argType="com.grupo20.vinilos.modelos.Album" />
     </fragment>
     <fragment
         android:id="@+id/tracksFragment"
         android:name="com.grupo20.vinilos.ui.tracks.TracksFragment"
         android:label="fragment_tracks"
-        tools:layout="@layout/fragment_tracks" />
+        tools:layout="@layout/fragment_tracks" >
+        <action
+            android:id="@+id/action_tracksFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+        <argument
+            android:name="Album"
+            app:argType="com.grupo20.vinilos.modelos.Album" />
+    </fragment>
 </navigation>

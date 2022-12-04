@@ -3,15 +3,16 @@ package com.grupo20.vinilos.ui.tracks
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.grupo20.vinilos.modelos.Album
 import com.grupo20.vinilos.modelos.Track
 import com.grupo20.vinilos.repositories.TrackRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TracksViewModel(application: Application) :  AndroidViewModel(application) {
+class TracksViewModel(application: Application, album: Album) :  AndroidViewModel(application) {
 
-    private val tracksRepository = TrackRepository(application)
+    private val tracksRepository = TrackRepository(application, album)
 
     private val _tracks = MutableLiveData<List<Track>>()
 
@@ -31,7 +32,6 @@ class TracksViewModel(application: Application) :  AndroidViewModel(application)
     init {
         refreshDataFromNetwork()
     }
-
     fun refreshDataFromNetwork() {
 
         try {
@@ -53,11 +53,11 @@ class TracksViewModel(application: Application) :  AndroidViewModel(application)
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val alb: Album) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(TracksViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return TracksViewModel(app) as T
+                return TracksViewModel(app, alb) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
