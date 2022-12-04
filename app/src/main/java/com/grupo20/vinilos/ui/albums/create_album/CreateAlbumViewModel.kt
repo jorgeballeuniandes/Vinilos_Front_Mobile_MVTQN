@@ -24,6 +24,7 @@ class CreateAlbumViewModel (application: Application) :  AndroidViewModel(applic
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
+
     fun enviarFormulario(dataMap:Map<Any?, Any?>, onComplete:(resp:JSONObject)->Unit, onError: (error:VolleyError)->Unit){
         try {
             viewModelScope.launch (Dispatchers.Default) {

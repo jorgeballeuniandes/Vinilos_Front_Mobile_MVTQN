@@ -9,10 +9,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.grupo20.vinilos.modelos.Album
-import com.grupo20.vinilos.modelos.Artist
-import com.grupo20.vinilos.modelos.Collector
-import com.grupo20.vinilos.modelos.Comment
+import com.grupo20.vinilos.modelos.*
 
 import org.json.JSONArray
 import org.json.JSONObject
@@ -53,6 +50,24 @@ class NetworkServiceAdapter constructor(context: Context) {
                 cont.resumeWithException(it)
             }))
     }
+
+    suspend fun getTracks(album: Int):List<Track> = suspendCoroutine { cont->
+        requestQueue.add(getRequest(
+            "albums/$album/tracks",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Track>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    list.add(i, Track(trackId = item.getInt("id"),name = item.getString("name"), duration = item.getString("duration")))
+                }
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
+    }
+
     suspend fun getCollectors():List<Collector> = suspendCoroutine <List<Collector>>{ cont->
 
         requestQueue.add(getRequest("collectors",
@@ -122,13 +137,26 @@ class NetworkServiceAdapter constructor(context: Context) {
         Log.d("QUESO", "postAlbum: " + body.toString())
         requestQueue.add(postRequest("albums",
             body,
-            Response.Listener<JSONObject> { response ->
+            { response ->
                 onComplete(response)
             },
-            Response.ErrorListener {
+            {
                 onError(it)
             }))
     }
+
+    fun postTrack(album: Int, body: JSONObject,  onComplete:(resp:JSONObject)->Unit , onError: (error:VolleyError)->Unit){
+        Log.d("QUESO", "postAlbum: " + body.toString())
+        requestQueue.add(postRequest("albums/$album/tracks",
+            body,
+            { response ->
+                onComplete(response)
+            },
+            {
+                onError(it)
+            }))
+    }
+
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
     }

@@ -3,6 +3,7 @@ package com.grupo20.vinilos.ui.albums.detail_album
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,6 +56,7 @@ class AlbumDetailFragment : Fragment() {
         val txt_album_release_date: TextView = view.findViewById(R.id.txt_album_release_date)
         val imagen: ImageView = view.findViewById(R.id.imv_album_cover)
         val back: Button = view.findViewById(R.id.btn_back)
+        val tracks: Button = view.findViewById(R.id.btn_album_tracks)
         val navigator: NavController = findNavController()
         val format = SimpleDateFormat("yyyy-MM-dd")
 
@@ -65,6 +67,13 @@ class AlbumDetailFragment : Fragment() {
         back.setOnClickListener {
             val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToNavigationAlbums()
             navigator.navigate(action)
+        }
+
+        tracks.setOnClickListener {
+
+            val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToTracksFragment(album)
+            navigator.navigate(action)
+
         }
 
         Glide.with(this)
