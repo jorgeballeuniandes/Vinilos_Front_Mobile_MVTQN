@@ -9,10 +9,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.grupo20.vinilos.modelos.Album
-import com.grupo20.vinilos.modelos.Artist
-import com.grupo20.vinilos.modelos.Collector
-import com.grupo20.vinilos.modelos.Comment
+import com.grupo20.vinilos.modelos.*
 
 import org.json.JSONArray
 import org.json.JSONObject
@@ -53,6 +50,23 @@ class NetworkServiceAdapter constructor(context: Context) {
                 cont.resumeWithException(it)
             }))
     }
+
+    suspend fun getTracks():List<Track> = suspendCoroutine { cont->
+        requestQueue.add(getRequest("albums/100/tracks",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Track>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    list.add(i, Track(trackId = item.getInt("id"),name = item.getString("name"), duration = item.getString("duration")))
+                }
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
+    }
+
     suspend fun getCollectors():List<Collector> = suspendCoroutine <List<Collector>>{ cont->
 
         requestQueue.add(getRequest("collectors",
