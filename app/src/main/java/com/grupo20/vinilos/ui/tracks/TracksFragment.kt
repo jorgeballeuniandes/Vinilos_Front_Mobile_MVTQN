@@ -55,10 +55,16 @@ class TracksFragment : Fragment() {
         recyclerView.adapter = viewModelAdapter
 
         val back: Button = view.findViewById(com.grupo20.vinilos.R.id.btn_back)
+        val add_tracks: Button = view.findViewById(com.grupo20.vinilos.R.id.btn_add_track)
         val navigator: NavController = findNavController()
 
         back.setOnClickListener {
             val action = TracksFragmentDirections.actionTracksFragmentToAlbumDetailFragment(album)
+            navigator.navigate(action)
+        }
+
+        add_tracks.setOnClickListener {
+            val action = TracksFragmentDirections.actionTracksFragmentToCreateTrackFragment(album)
             navigator.navigate(action)
         }
 

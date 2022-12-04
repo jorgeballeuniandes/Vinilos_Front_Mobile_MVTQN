@@ -137,13 +137,26 @@ class NetworkServiceAdapter constructor(context: Context) {
         Log.d("QUESO", "postAlbum: " + body.toString())
         requestQueue.add(postRequest("albums",
             body,
-            Response.Listener<JSONObject> { response ->
+            { response ->
                 onComplete(response)
             },
-            Response.ErrorListener {
+            {
                 onError(it)
             }))
     }
+
+    fun postTrack(album: Int, body: JSONObject,  onComplete:(resp:JSONObject)->Unit , onError: (error:VolleyError)->Unit){
+        Log.d("QUESO", "postAlbum: " + body.toString())
+        requestQueue.add(postRequest("albums/$album/tracks",
+            body,
+            { response ->
+                onComplete(response)
+            },
+            {
+                onError(it)
+            }))
+    }
+
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
     }

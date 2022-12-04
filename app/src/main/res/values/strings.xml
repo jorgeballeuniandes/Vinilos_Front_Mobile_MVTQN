@@ -41,4 +41,6 @@
     <string name="title_tracks">Album\'s Tracks</string>
     <string name="no_tracks">No hay tracks asociados</string>
     <string name="add_track">Add Track</string>
+    <string name="duration_track">Duration</string>
+    <string name="create_a_new_track">Create a new Track</string>
 </resources>

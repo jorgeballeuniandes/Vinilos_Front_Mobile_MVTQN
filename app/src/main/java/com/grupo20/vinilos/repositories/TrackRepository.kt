@@ -14,9 +14,9 @@ class TrackRepository(val application: Application, album: Album){
         //Determinar la fuente de datos que se va a utilizar. Si es necesario consultar la red, ejecutar el siguiente código
         return NetworkServiceAdapter.getInstance(application).getTracks(_album.albumId)
     }
-    /*suspend fun createAlbum(requesData:Map<Any?, Any?>, onComplete:(resp: JSONObject)->Unit, onError: (error: VolleyError)->Unit) {
+    suspend fun createTrack(requesData:Map<Any?, Any?>, onComplete:(resp: JSONObject)->Unit, onError: (error: VolleyError)->Unit) {
         //Determinar la fuente de datos que se va a utilizar. Si es necesario consultar la red, ejecutar el siguiente código
         val requestObject : JSONObject = JSONObject(requesData)
-        return NetworkServiceAdapter.getInstance(application).postAlbum(requestObject, onComplete, onError)
-    }*/
+        return NetworkServiceAdapter.getInstance(application).postTrack(_album.albumId, requestObject, onComplete, onError)
+    }
 }
